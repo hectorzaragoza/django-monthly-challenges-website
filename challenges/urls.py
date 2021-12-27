@@ -5,7 +5,7 @@ from . import views
 # You do this by creating a list of the urls that you want to support. Import path from django.urls.
 
 urlpatterns = [
-    path("", views.index),
+    path("", views.index, name="index"),
     path("<int:month>", views.monthly_challenge_by_number),
     path("<str:month>", views.monthly_challenge, name="month-challenge")
 ]
