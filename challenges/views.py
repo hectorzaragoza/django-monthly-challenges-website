@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
+
 # Create your views here.
 
 # These were hardcoded route/response...monthly_challenge implements dynamic req/res
@@ -66,8 +67,13 @@ def monthly_challenge_by_number(request, month):
 def monthly_challenge(request, month):
     try:
         challenge_text = monthly_challenges[month]
-        response_data = f"<h1>{challenge_text}</h1>"
-        return HttpResponse(response_data)
+        # This line replaces the render_to_string line and the HttpResponse
+        return render(request, "challenges/challenge.html", {
+            "text": challenge_text,
+            "month": month
+        })
+        # response_data = render_to_string("challenges/challenge.html")
+        # return HttpResponse(response_data)
     except:
         return HttpResponseNotFound("<h1>This month is not supported!</h1>")
 
